@@ -113,23 +113,30 @@ const Movie=require('./../Models/movieModels');
 //     // });
 
 // }
-exports.getAllMovies= async(req,res)=>{
-    try{
-        const movies=await Movie.find();
+exports.getAllMovies = async (_, res) => {
+    try {
+        const movies = await Movie.find();
+        if (!movies || movies.length === 0) {
+            return res.status(404).json({
+                status: 'fail',
+                message: 'No movies found'
+            });
+        }
         res.status(200).json({
-            status:'success',
+            status: 'success',
             length: movies.length,
-            data:{
-                movies
+            data: {
+                movies: movies
             }
         });
-    }catch(err){
+    } catch (err) {
+        console.error('Error fetching movies:', err.message);
         res.status(404).json({
-            status:'fail',
-            message:err.message
+            status: 'fail',
+            message: err.message
         });
     }
-}
+};
 exports.createMovie= async(req,res)=>{
     // const testMovie = new movie({});
     // testMovie.save()
@@ -198,4 +205,4 @@ exports.deleteMovie=async(req,res)=>{
             message:err.message
         });
     }
-};  
+};
