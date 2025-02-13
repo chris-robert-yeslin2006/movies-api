@@ -1,0 +1,57 @@
+[
+    {
+    "name": "The Shawshank Redemption",
+    "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "duration": "2h 22min",
+    "releaseYear": "1994-10-14T00:00:00.000Z",
+    "genres": ["Drama"],
+    "directors": ["Frank Darabont"],
+    "coverImage": "shawshank.jpg",
+    "actors": ["Tim Robbins", "Morgan Freeman"],
+    "price": 9.99
+    },
+    {
+    "name": "The Godfather",
+    "description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+    "duration": "2h 55min",
+    "releaseYear": "1972-03-24T00:00:00.000Z",
+    "genres": ["Crime", "Drama"],
+    "directors": ["Francis Ford Coppola"],
+    "coverImage": "godfather.jpg",
+    "actors": ["Marlon Brando", "Al Pacino"],
+    "price": 12.99
+    },
+    {
+    "name": "The Dark Knight",
+    "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "duration": "2h 32min",
+    "releaseYear": "2008-07-18T00:00:00.000Z",
+    "genres": ["Action", "Crime", "Drama"],
+    "directors": ["Christopher Nolan"],
+    "coverImage": "darkknight.jpg",
+    "actors": ["Christian Bale", "Heath Ledger"],
+    "price": 8.99
+    },
+    {
+    "name": "Pulp Fiction",
+    "description": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    "duration": "2h 34min",
+    "releaseYear": "1994-10-14T00:00:00.000Z",
+    "genres": ["Crime", "Drama"],
+    "directors": ["Quentin Tarantino"],
+    "coverImage": "pulpfiction.jpg",
+    "actors": ["John Travolta", "Samuel L. Jackson"],
+    "price": 7.99
+    },
+    {
+    "name": "Schindler's List",
+    "description": "In German-occupied Poland during World War II, Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazi regime.",
+    "duration": "3h 15min",
+    "releaseYear": "1993-12-15T00:00:00.000Z",
+    "genres": ["Biography", "Drama", "History"],
+    "directors": ["Steven Spielberg"],
+    "coverImage": "schindlerslist.jpg",
+    "actors": ["Liam Neeson", "Ralph Fiennes"],
+    "price": 10.99
+    }
+    ]
