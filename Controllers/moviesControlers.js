@@ -34,8 +34,19 @@ const Movie = require('./../Models/movieModels');
 
 exports.getAllMovies = async (req, res) => {
     try {
-        console.log(req.query);
-        const movie = await Movie.find(req.query);
+        // console.log(req.query);
+        let  queryStr=JSON.stringify(req.query);
+        // console.log(queryStr);
+        queryStr=queryStr.replace(/\b(gte|gt|lte|lt)\b/g,(match)=>`$${match}`);
+        const objStr=JSON.parse(queryStr);
+        // console.log(objStr);
+        const movie = await Movie.find(objStr);
+        // const movie=await Movie.find()
+        //                         .where('duration').gte(req.query.duration)
+        //                         .where('ratings').gte(req.query.ratings)
+                                
+        //                         .where('price').gte(req.query.price)
+                                
         if (!movie) {
             return res.status(404).json({
                 status: 'fail',
