@@ -1,4 +1,3 @@
-// const {params}=require('../routes/moviesRoutes');
 const Movie = require('./../Models/movieModels');
 
 // exports.getAllMovies = async (req, res) => {
@@ -40,13 +39,25 @@ exports.getAllMovies = async (req, res) => {
         queryStr=queryStr.replace(/\b(gte|gt|lte|lt)\b/g,(match)=>`$${match}`);
         const objStr=JSON.parse(queryStr);
         // console.log(objStr);
-        const movie = await Movie.find(objStr);
-        // const movie=await Movie.find()
-        //                         .where('duration').gte(req.query.duration)
-        //                         .where('ratings').gte(req.query.ratings)
-                                
-        //                         .where('price').gte(req.query.price)
-                                
+        // delete objStr.fields;
+        // delete objStr.sort;
+        let query=  Movie.find(objStr);
+                                    // const movie=await Movie.find()
+                                    //                         .where('duration').gte(req.query.duration)
+                                    //                         .where('ratings').gte(req.query.ratings)
+                                                            
+                                    //                         .where('price').gte(req.query.price)
+        
+                                    
+        //limiting feilds
+        // if(req.query.fields){
+        //     console.log(req.query.fields);
+        //     const feilds=req.query.fields.split(',').join(' ');
+        //     query=query.select(feilds);
+        // }
+        
+        query=query.select('-__v');
+        const movie = await query;
         if (!movie) {
             return res.status(404).json({
                 status: 'fail',
