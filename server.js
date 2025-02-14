@@ -7,7 +7,7 @@ dotenv.config({
 const app=require('./app');
 // console.log(process.env); 
 mongoose.connect(process.env.CONN_STR, {
-    useNewUrlParser: true
+    // useNewUrlParser: true
 }).then((conn) => {
     // console.log(conn);
     console.log('successfully connected to db');
