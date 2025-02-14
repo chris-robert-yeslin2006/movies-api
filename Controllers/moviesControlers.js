@@ -34,7 +34,8 @@ const Movie = require('./../Models/movieModels');
 
 exports.getAllMovies = async (req, res) => {
     try {
-        const movie = await Movie.find();
+        console.log(req.query);
+        const movie = await Movie.find(req.query);
         if (!movie) {
             return res.status(404).json({
                 status: 'fail',
@@ -43,6 +44,7 @@ exports.getAllMovies = async (req, res) => {
         }
         res.status(200).json({
             status: 'success',
+            length:movie.length,
             data: {
                 movie
             }
