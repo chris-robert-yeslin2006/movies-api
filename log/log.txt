@@ -1,7 +1,6 @@
-a new movie has been added with the name chris as spideycreated by robert
-a new movie has been added with the name yeslin as aizen created by robert
-a new movie has been added with the name robert as aizen created by robert
-a new movie has been added with the name robert  aizen created by robert
-query took 42ms
-query took 45ms
-query took 99ms
+A new movie document with name Test 1 has been created by MANOJJHA
+A new movie document with name Test 2 has been created by MANOJJHA
+A new movie document with name Sample Movie has been created by MANOJJHA
+Query took 249 milliseconds to fetch the documents.Query took 239 milliseconds to fetch the documents.Query took 236 milliseconds to fetch the documents.Query took 246 milliseconds to fetch the documents.Query took 4555 milliseconds to fetch the documents.Query took 236 milliseconds to fetch the documents.A new movie document with name Test Movie 1 has been created by MANOJJHA
+Query took 42 milliseconds to fetch the documents.A new movie document with name aizen has been created by MANOJJHA
+Query took 32 milliseconds to fetch the documents.Query took 36 milliseconds to fetch the documents.Query took 35 milliseconds to fetch the documents.Query took 41 milliseconds to fetch the documents.query took 36ms

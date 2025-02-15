@@ -1,28 +1,22 @@
+//IMPORT PACKAGE
 const express = require('express');
-const morgan=require('morgan');
-const movieRoute=require('./Routes/moviesRoutes');
+const morgan = require('morgan');
+const moviesRouter = require('./Routes/moviesRoutes');
+
 let app = express();
 
-
-
 app.use(express.json());
-if(process.env.NODE_ENV==='development'){
-    app.use(morgan('dev'));
 
-}
 app.use(express.static('./public'))
-app.use((req,res,next)=>{
-    
 
-    req.requestAtTime=new Date().toISOString();
-    next();
+//USING ROUTES
+app.use('/api/v1/movies', moviesRouter);
+app.get('*',(req,res) => {
+    res.status(404).json({
+        status: 'fail',
+        message: 'Invalid URL'
+    });
+});
 
-})
-
-
-
-
-
-app.use('/api/v1/movies',movieRoute);
-module.exports=app;
+module.exports = app;
 
