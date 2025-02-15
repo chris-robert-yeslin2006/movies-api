@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan=require('morgan');
-const movieRoute=require('./routes/moviesRoutes');
+const movieRoute=require('./Routes/moviesRoutes');
 let app = express();
 
 
