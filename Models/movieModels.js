@@ -80,6 +80,12 @@ movieSchema.pre('save', function(next) {
     this.createdBy = "robert";
     next();
 });
+movieSchema.pre(/^find/, function(next) {
+    this.find({releaseYear:{$lte:Date.now()}});
+    this.startTime=Date.now();
+    next();
+});
+
 movieSchema.post('save', function(doc, next) {
     const content=`a new movie has been added with the name ${doc.name} created by ${doc.createdBy}\n`;
     fs.writeFileSync('./log/log.txt',content,{flag:'a'},(err)=>{
@@ -88,6 +94,17 @@ movieSchema.post('save', function(doc, next) {
         }
     });
 
+    next();
+});
+movieSchema.post(/^find/, function(docs, next) {
+    this.find({releaseDate:{$gte:Date.now()}});
+    this.endTime=Date.now();
+    const content=`query took ${this.endTime-this.startTime}ms\n`;
+    fs.writeFileSync('./log/log.txt',content,{flag:'a'},(err)=>{
+        if(err){
+            console.log(err.message);
+        }
+    });
     next();
 });
 
