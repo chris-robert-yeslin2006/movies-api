@@ -8,3 +8,5 @@ query took 63ms
 query took 39ms
 a new movie has been added with the name yeslin parker created by robert
 a new movie has been added with the name bull m dinesh created by robert
+query took 48ms
+query took 37ms
