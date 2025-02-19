@@ -13,7 +13,7 @@ app.use(express.static('./public'))
 
 //USING ROUTES
 app.use('/api/v1/movies', moviesRouter);
-app.get('*',(req,res) => {
+app.get('*',(req,res,next) => {
     // res.status(404).json({
     //     status: 'fail',
     //     message: 'Invalid URL'
