@@ -2,7 +2,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const moviesRouter = require('./Routes/moviesRoutes');
-
+const customError = require('./utils/customError');
+const errorController = require('./Controllers/errorController');
+const e = require('express');
 let app = express();
 
 app.use(express.json());
@@ -16,21 +18,15 @@ app.get('*',(req,res) => {
     //     status: 'fail',
     //     message: 'Invalid URL'
     // });
-    const err=new Error('Invalid URL');
-    err.statusCode=404;
-    err.status='fail';
+    // const err=new Error('Invalid URL');
+    // err.statusCode=404;
+    // err.status='fail';
+    const err=new customError('Invalid URL',404);
     next(err);
 
 });
 
-app.use((error, req, res, next) => {
-    error.statusCode = error.statusCode || 500;
-    error.status = error.status || 'error';
-    res.status(error.statusCode).json({
-        status: error.statusCode,
-        message: error.message
-    });
-});
+app.use(errorController);
 
 module.exports = app;
 

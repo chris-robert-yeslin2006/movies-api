@@ -1,6 +1,9 @@
 const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
 const mongoose = require('mongoose');
+const punycode = require('punycode/');
+
+mongoose.set('strictQuery', false);
 const app = require('./app');
 
 //console.log(app.get('env'));
@@ -16,6 +19,7 @@ mongoose.connect(process.env.CONN_STR, {
 });
 
 const port = process.env.PORT || 3000;
+
 
 app.listen(port, () => {
     console.log('server has started...');
