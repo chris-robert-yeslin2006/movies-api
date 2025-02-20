@@ -24,10 +24,28 @@ exports.getAllMovies = asyncErrorHandler(async (req, res, next) => {
     });
 });
 
-exports.createMovie = asyncErrorHandler(async (req, res) => {
+// exports.createMovie = asyncErrorHandler(async (req, res) => {
+//     const movie = await Movie.create(req.body);
+//     res.status(201).json({
+//         status: 'success',
+//         data: { movie }
+//     });
+// });
+
+
+
+exports.createMovie = asyncErrorHandler(async (req, res, next) => {
+    // Check if the movie already exists
+    const existingMovie = await Movie.findOne({ name: req.body.name });
+
+    if (existingMovie) {
+        return next(new customError("Movie already exists", 400));
+    }
+
+    // Create a new movie
     const movie = await Movie.create(req.body);
     res.status(201).json({
-        status: 'success',
+        status: "success",
         data: { movie }
     });
 });
