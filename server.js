@@ -2,6 +2,14 @@ const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
 const mongoose = require('mongoose');
 const punycode = require('punycode/');
+process.on('uncaughtException', (err) => {
+    console.log(err.name,err.message);
+    console.log('Uncaught Exception. Shutting down...');
+    
+        process.exit(1);
+    
+});
+
 
 mongoose.set('strictQuery', false);
 const app = require('./app');
@@ -30,6 +38,7 @@ process.on('unhandledRejection', (err) => {
         process.exit(1);
     });
 });
+
 
 
 
