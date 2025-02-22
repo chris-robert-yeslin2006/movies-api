@@ -1,5 +1,5 @@
 const devError = (err, res) => {    
-    res.status(err.statusCode).json({
+    res.status(500).json({
         status: err.statusCode,
         message: err.message,
         stackTrace:err,

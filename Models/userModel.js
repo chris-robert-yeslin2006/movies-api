@@ -1,5 +1,7 @@
 const mongoose=require('mongoose');
 const validator=require('validator');
+const bcrypt=require('bcryptjs');
+// const { validate } = require('./movieModel');
 
 const userSchema=new mongoose.Schema({
     name:{
@@ -26,9 +28,27 @@ const userSchema=new mongoose.Schema({
         required:[true,'Confirm password is required'],
         minlength:8,
         trim:true,
+        validate:{validator:function(value){
+            if(value===this.password){
+                return true;
+            }
+            else{
+                throw new Error('Passwords do not match');
+            }
+        },message:'Passwords do not match'}
     },
     photo:String,
 
+
+});
+userSchema.pre('save', async function(next){
+    if(!(this.isModified('password'))){
+        return next();
+    }
+
+    this.password=await bcrypt.hash(this.password,10);
+    this.confirmPassword=undefined;
+    next();
 
 });
 
