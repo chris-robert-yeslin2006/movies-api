@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const moviesRouter = require('./Routes/moviesRoutes');
+const authRouter = require('./routes/authRouter');
 const customError = require('./utils/customError');
 const errorController = require('./Controllers/errorController');
 const e = require('express');
@@ -13,6 +14,7 @@ app.use(express.static('./public'))
 
 //USING ROUTES
 app.use('/api/v1/movies', moviesRouter);
+app.use('/api/v1/users',authRouter);
 app.get('*',(req,res,next) => {
     // res.status(404).json({
     //     status: 'fail',
