@@ -12,3 +12,20 @@ query took 48ms
 query took 37ms
 a new movie has been added with the name bull m created by robert
 query took 49ms
+query took 45ms
+query took 61ms
+query took 47ms
+query took 37ms
+query took 39ms
+query took 31ms
+query took 35ms
+query took 49ms
+query took 315ms
+query took 49ms
+query took 38ms
+query took 43ms
+query took 82ms
+query took 33ms
+query took 36ms
+query took 31ms
+query took 33ms

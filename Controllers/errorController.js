@@ -23,12 +23,16 @@ const prodError = (err, res) => {
     
 }
 
+const handleExpiredJWT=(message)=>{
+    return new customError('jwt expired,please login again',401);
+}
 module.exports = (error, req, res, next) => {
     if(process.env.NODE_ENV==='development'){
         devError(error, res);
     }else if(process.env.NODE_ENV==='production'){
         
         prodError(error, res);
+        if(error.name==='TokenExpiredError') error=handleExpiredJWT('Token expired');
 
     }
     
