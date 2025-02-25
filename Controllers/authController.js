@@ -71,7 +71,7 @@ exports.login = asyncErrorHandler(async (req, res, next) => {
             return next(error);
         }
 
-        
+
         // Verify the token
         const decodedToken = await util.promisify(jwt.verify)(token, process.env.SECRET_STR);
         console.log(decodedToken);
@@ -103,3 +103,17 @@ exports.login = asyncErrorHandler(async (req, res, next) => {
             next();
         
     }};
+
+    exports.forgotPassword=asyncErrorHandler(async(req,res,next)=>{
+
+        const user=await User.findOne({ email:req.body.email });
+        if(!user){
+            const error=new customError('No user found with that email',404);
+            return next(error);
+        }
+        const resetToken=user.createPasswordResetToken();
+        user.save({ validateBeforeSave: false });
+        return resetToken;
+    });
+    exports.resetPassword=asyncErrorHandler(async(req,res,next)=>{
+        const user=await User   }); 
