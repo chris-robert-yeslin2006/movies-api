@@ -29,3 +29,8 @@ query took 33ms
 query took 36ms
 query took 31ms
 query took 33ms
+query took 34ms
+query took 39ms
+query took 47ms
+query took 35ms
+query took 42ms

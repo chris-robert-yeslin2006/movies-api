@@ -61,7 +61,7 @@ exports.login = asyncErrorHandler(async (req, res, next) => {
         // Get the token from the authorization header
         const testToken = req.headers.authorization;
         let token;
-        if (testToken && testToken.split(' ')[0] === 'bearer') {
+        if (testToken && testToken.split(' ')[0] === 'Bearer') {
             token = testToken.split(' ')[1];
         }
 
@@ -71,6 +71,7 @@ exports.login = asyncErrorHandler(async (req, res, next) => {
             return next(error);
         }
 
+        
         // Verify the token
         const decodedToken = await util.promisify(jwt.verify)(token, process.env.SECRET_STR);
         console.log(decodedToken);
@@ -88,7 +89,17 @@ exports.login = asyncErrorHandler(async (req, res, next) => {
             const error = new customError('Password has been changed', 401);
             return next(error);
         }
-
+        req.user = user;
         // Grant access to the protected route
         next();
     });
+
+    exports.restrict=(role)=>{
+        return (req,res,next)=>{
+            if(req.user.role!==role){
+                const error=new customError('You do not have permission to perform this action',403);
+                return next(error);
+            }
+            next();
+        
+    }};
