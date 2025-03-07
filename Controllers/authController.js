@@ -1,8 +1,9 @@
-const User = require('../models/userModel');
+const User = require('../Models/userModel');
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
 const jwt = require('jsonwebtoken');
 const customError = require('../utils/customError');  
 const util=require('util'); 
+const sendEmail=require('./../utils/email');
 
 const signToken = (id) => {
     return jwt.sign({ id }, process.env.SECRET_STR, {
@@ -19,6 +20,7 @@ exports.signup = asyncErrorHandler(async (req, res, next) => {
         const token = signToken(newUser._id);
         // console.log(token);
         // console.log('Secret Key:', process.env.SECRET_STR);
+
 
         res.status(200).json({
             status:"success",
@@ -104,16 +106,33 @@ exports.login = asyncErrorHandler(async (req, res, next) => {
         
     }};
 
-    exports.forgotPassword=asyncErrorHandler(async(req,res,next)=>{
+    exports.forgotPassword = asyncErrorHandler(async (req, res, next) => {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) return next(new customError("No user found with that email", 404));
 
-        const user=await User.findOne({ email:req.body.email });
-        if(!user){
-            const error=new customError('No user found with that email',404);
-            return next(error);
-        }
-        const resetToken=user.createPasswordResetToken();
-        user.save({ validateBeforeSave: false });
-        return resetToken;
-    });
+    const resetToken = user.createPasswordResetToken();
+    await user.save({ validateBeforeSave: false });
+
+    const resetURL = `${req.protocol}://${req.get("host")}/api/v1/users/resetPassword/${resetToken}`;
+    const message = `Click the link to reset your password: \n\n ${resetURL}`;
+
+    try {
+        await sendEmail({
+            to: user.email,
+            subject: "Password Reset Token",
+            message,
+        });
+
+        res.status(200).json({
+            status: "success",
+            message: "Password reset email sent successfully",
+        });
+    } catch (err) {
+        user.passwordResetToken = undefined;
+        user.passwordResetExpires = undefined;
+        await user.save({ validateBeforeSave: false });
+        return next(new customError("Error sending email", 500));
+    }
+});
     exports.resetPassword=asyncErrorHandler(async(req,res,next)=>{
         const user=await User   }); 
