@@ -9,6 +9,7 @@ const signToken = (id) => {
     return jwt.sign({ id }, process.env.SECRET_STR, {
         expiresIn: process.env.LOGIN_EXPIRES,
     });
+    
 }
 
 exports.signup = asyncErrorHandler(async (req, res, next) => {
